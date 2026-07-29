@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markt-Trigger-Snapshot · DACH Schwergut- &amp; Projektlogistik · Juli 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B1116;
+    --bg-card: #10171E;
+    --bg-elevated: #141D25;
+    --border: rgba(232,163,61,0.14);
+    --border-strong: rgba(232,163,61,0.30);
+    --border-neutral: rgba(255,255,255,0.08);
+    --text: #FFFFFF;
+    --text-muted: #9BA9B4;
+    --text-dim: #66757F;
+    --accent: #E8A33D;
+    --accent-bright: #FFC670;
+    --accent-glow: rgba(232,163,61,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+
+  /* HEADER */
+  .header {
+    padding: 80px 0 64px;
+    border-bottom: 1px solid var(--border-neutral);
+    background: linear-gradient(180deg, #0E141A 0%, #0B1116 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+    opacity: 0.55;
+  }
+  .header-meta {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .header h1 {
+    font-size: 54px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .header h1 .accent { color: var(--accent); }
+  .header .sub {
+    font-size: 19px;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 720px;
+    line-height: 1.55;
+    margin-bottom: 48px;
+  }
+  .header-stats {
+    display: flex;
+    gap: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-neutral);
+    flex-wrap: wrap;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .stat-value { color: var(--text); font-size: 16px; font-weight: 500; }
+  .stat-value strong { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+
+  /* CONTEXT BAR */
+  .context-bar {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-neutral);
+    border-bottom: 1px solid var(--border-neutral);
+    padding: 32px 0;
+  }
+  .context-bar .container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .context-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .context-text { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+  .context-text strong { color: var(--text); font-weight: 500; }
+
+  /* SIGNALS */
+  .signals-section { padding: 96px 0 64px; }
+  .signals-intro { margin-bottom: 64px; }
+  .signals-intro h2 {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .signals-intro h3 {
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+    max-width: 760px;
+  }
+
+  .signal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-neutral);
+    border-radius: 4px;
+    padding: 48px 48px;
+    margin-bottom: 24px;
+    transition: border-color 0.2s ease;
+  }
+  .signal:hover { border-color: var(--border-strong); }
+  .signal-number-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-neutral);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .signal-number {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .signal-type {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+  }
+  .signal-company { font-size: 32px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 12px; line-height: 1.2; }
+  .signal-meta {
+    display: flex;
+    gap: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .signal-meta span strong { color: var(--text-muted); font-weight: 500; }
+  .signal-event { color: var(--text); font-size: 17px; line-height: 1.7; margin-bottom: 28px; font-weight: 400; }
+  .signal-event .highlight {
+    background: var(--accent-glow);
+    color: var(--accent-bright);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+  }
+  .signal-implication {
+    background: var(--bg-elevated);
+    border-left: 2px solid var(--accent);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border-radius: 2px;
+  }
+  .signal-implication-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .signal-implication-text { color: var(--text); font-size: 15px; line-height: 1.6; font-weight: 400; }
+
+  .signal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-neutral);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .source-info { font-family: 'JetBrains Mono', monospace; color: var(--text-dim); font-size: 12px; letter-spacing: 1px; }
+  .source-info strong { color: var(--text-muted); font-weight: 500; }
+  .source-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+  .source-button:hover { background: var(--accent); color: #0B1116; }
+  .source-button .arrow { display: inline-block; transition: transform 0.15s ease; }
+  .source-button:hover .arrow { transform: translateX(3px); }
+
+  /* SYNTHESIS */
+  .synthesis {
+    margin-top: 64px;
+    padding: 64px 0;
+    border-top: 2px solid var(--accent);
+    background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 100%);
+  }
+  .synthesis-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    font-weight: 600;
+  }
+  .synthesis-text {
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.3px;
+    max-width: 980px;
+    color: var(--text);
+  }
+  .synthesis-text .em { color: var(--accent-bright); }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border-neutral); padding: 48px 0; margin-top: 64px; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .footer-block-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .footer-block-text { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+  .footer-block-text strong { color: var(--text); font-weight: 500; }
+
+  .signature {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .signature .sg-brand { color: var(--accent); font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .header { padding: 48px 0 40px; }
+    .header h1 { font-size: 32px; }
+    .header .sub { font-size: 16px; }
+    .header-stats { gap: 32px; }
+    .context-bar .container { grid-template-columns: 1fr; gap: 16px; }
+    .signals-section { padding: 56px 0 40px; }
+    .signals-intro h3 { font-size: 24px; }
+    .signal { padding: 28px 24px; }
+    .signal-company { font-size: 24px; }
+    .signal-event { font-size: 15px; }
+    .synthesis { padding: 40px 0; }
+    .synthesis-text { font-size: 18px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .signature { padding: 0 24px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="header">
+  <div class="container">
+    <div class="header-meta">Markt-Trigger-Snapshot · DACH Schwergut- &amp; Projektlogistik</div>
+    <h1>Fünf Aufträge.<br>Vierzehn Wochen.<br><span class="accent">Eine Schwergut-Welle.</span></h1>
+    <p class="sub">Live recherchierte Bedarfssignale aus dem DACH-Schwermaschinen- und Anlagenbau, die sich auf das adressierbare Universum von Alfons Köster zubewegen: Tunnelbohrmaschinen, Turbinen-Generator-Sätze, Offshore-Konverterkomponenten und Exportanlagen mit konkretem Verschiffungs- und Schwertransport-Bedarf.</p>
+    <div class="header-stats">
+      <div class="stat-block">
+        <div class="stat-label">Erstellt für</div>
+        <div class="stat-value">alfons-koester.de · Discovery Call</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Stand</div>
+        <div class="stat-value"><strong>29. Juli 2026</strong></div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Geographischer Scope</div>
+        <div class="stat-value">DACH · Fertigung → weltweite Zielmärkte</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Quellen</div>
+        <div class="stat-value"><strong>5/5</strong> verifiziert</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="context-bar">
+  <div class="container">
+    <div class="context-label">Marktkontext</div>
+    <div class="context-text">
+      <strong>Der deutsche Maschinenbau meldet laut VDMA im März 2026 ein reales Auftragsplus von 27 Prozent, das Auslandsgeschäft legt um 31 Prozent zu.</strong> Was in den Auftragsmeldungen selten sichtbar wird: jede dieser Bestellungen erzeugt ein physisches Problem – Turbinen, Konverter, Bohrköpfe und Exportanlagen-Module müssen zerlegt, seemäßig verpackt und zum Teil in anspruchsvolle Zielregionen verschifft werden, bevor der Auftrag als erfüllt gilt. Die folgenden fünf Signale verorten sich vor diesem Hintergrund.
+    </div>
+  </div>
+</section>
+
+<section class="signals-section">
+  <div class="container">
+
+    <div class="signals-intro">
+      <h2>Verifizierte Bedarfssignale</h2>
+      <h3>Was sich in den letzten 14 Wochen in Ihrem Markt bewegt hat.</h3>
+    </div>
+
+    <!-- SIGNAL 1 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 01 / 05</div>
+        <div class="signal-type">Maschinenübergabe</div>
+      </div>
+      <h3 class="signal-company">Herrenknecht AG</h3>
+      <div class="signal-meta">
+        <span><strong>HQ</strong>&nbsp; Schwanau, Deutschland</span>
+        <span><strong>Size</strong>&nbsp; ~5.500 MA weltweit</span>
+        <span><strong>Sektor</strong>&nbsp; Tunnelbohrmaschinenbau</span>
+        <span><strong>Datum</strong>&nbsp; 21.05.2026</span>
+      </div>
+      <p class="signal-event">
+        Herrenknecht übergibt am 21. Mai 2026 die erste von sechs bestellten Tunnelbohrmaschinen für die 2. Stammstrecke München an Bauherr DB InfraGO: eine 178 Meter lange, <span class="highlight">ca. 700 Tonnen</span> schwere Mixschild-TBM. Gesamtprojektleiter Kai Kruschinski-Wüst: „Die erste Tunnelbohrmaschine ist unser Pfadfinder." Die Maschine wird in Einzelteile zerlegt, zur Startbaugrube nahe der Donnersbergerbrücke transportiert und dort wieder montiert; Vortriebsbeginn für den Rettungstunnel ist September 2026. Fünf weitere Maschinen dieser Baureihe sind für dasselbe Projekt in Fertigung.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Herrenknecht ist der Referenzfall für genau die Transportkategorie, die Alfons Köster im eigenen Track Record führt (Tunnelbohrmaschine Hongkong–Seattle). Mit fünf weiteren TBM in Fertigung für dieses Projekt und laufenden internationalen Exportprojekten ab Schwanau besteht struktureller Bedarf an Zerlegungs-, Verpackungs- und Schwertransport-Logistik über die kommenden 12–24 Monate. Adressat: Leitung Logistik/Versand am Stammwerk Schwanau.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; deutschebahn.com &middot; 21.05.2026</div>
+        <a href="https://www.deutschebahn.com/de/presse/presse-regional/pr-muenchen-de/aktuell/presseinformationen/178-Meter-Hightech-fuer-Muenchen-Erste-Tunnelbohrmaschine-der-2-Stammstrecke-fertig-13883042" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 2 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 02 / 05</div>
+        <div class="signal-type">Grossauftrag</div>
+      </div>
+      <h3 class="signal-company">Nordex SE</h3>
+      <div class="signal-meta">
+        <span><strong>HQ</strong>&nbsp; Hamburg, Deutschland</span>
+        <span><strong>Size</strong>&nbsp; ~10.000 MA weltweit</span>
+        <span><strong>Sektor</strong>&nbsp; Windenergieanlagenbau</span>
+        <span><strong>Datum</strong>&nbsp; 07.07.2026</span>
+      </div>
+      <p class="signal-event">
+        Nordex Group meldet am 7. Juli 2026 einen Auftrag von Projektentwickler UKA über <span class="highlight">100 Windenergieanlagen</span> der Typen N175/6.X und N163/6.X mit insgesamt rund 700 MW für mehrere Standorte in Deutschland, inklusive mehrjähriger Service- und Wartungsverträge. Karsten Brüggemann, VP Region Central bei Nordex: „Wir freuen uns sehr über diese erneuten Bestellungen unseres langjährigen Partners UKA." UKA-CEO Gernot Gauglitz ergänzt, man setze damit die eigene Projektpipeline konsequent um.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          100 Anlagen bedeuten hunderte Rotorblatt-, Turm- und Maschinenhaus-Transporte, verteilt auf mehrere Bundesländer und Bauabschnitte bis in die Saison 2027 – klassischer Schwertransport- und Projektverladungsbedarf, der laufend an spezialisierte Sub-Logistiker vergeben wird. Adressat: Supply-Chain-/Logistikkoordination bei Nordex bzw. den beauftragten Errichtern vor Ort.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; nordex-online.com &middot; 07.07.2026</div>
+        <a href="https://www.nordex-online.com/de/2026/07/nordex-group-erhaelt-von-uka-auftraege-ueber-700-mw-aus-deutschland/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 3 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 03 / 05</div>
+        <div class="signal-type">Multi-Standort-Fertigung</div>
+      </div>
+      <h3 class="signal-company">Siemens Energy · NSORe (Neptun Werft &amp; Smulders)</h3>
+      <div class="signal-meta">
+        <span><strong>Bau-Standort</strong>&nbsp; Rostock-Warnemünde, DE</span>
+        <span><strong>Size</strong>&nbsp; Konzern &gt;100.000 MA</span>
+        <span><strong>Sektor</strong>&nbsp; Offshore-Netzanbindung</span>
+        <span><strong>Datum</strong>&nbsp; 27.07.2026</span>
+      </div>
+      <p class="signal-event">
+        Siemens Energy baut gemeinsam mit NSORe (Joint Venture aus Neptun Werft/Meyer-Werft-Gruppe und dem belgischen Smulders) im Auftrag von Übertragungsnetzbetreiber 50Hertz erstmals eine <span class="highlight">2-Gigawatt-Konverterplattform</span> mit einer deutschen Werft: „North Sea Connector 2". Rund 95 Prozent des Siemens-Energy-Lieferumfangs kommt aus Deutschland – Transformatoren und Konverter aus Nürnberg, gasisolierte Schaltanlagen aus Berlin, Topside-Fertigung in Rostock-Warnemünde, Jacket-Fertigung bei Smulders in den Niederlanden. Über 500 neue Arbeitsplätze entstehen in Mecklenburg-Vorpommern; Inbetriebnahme Ende 2034.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Vier Fertigungsstandorte in drei Ländern (Nürnberg, Berlin, Rostock, Niederlande) bedeuten Komponententransport zwischen mehreren Werken vor der finalen Montage auf der Plattform – genau das Multi-Modal-Muster aus Schwertransport, Seeverkehr und RoRo, das Alfons Köster im Kerngeschäft abdeckt. Mehrjähriger Baubeginn = wiederkehrendes Logistikvolumen, kein Einmalgeschäft. Adressat: Projektlogistik bei NSORe/Neptun Werft Rostock.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; windkraft-journal.de &middot; 27.07.2026</div>
+        <a href="https://www.windkraft-journal.de/2026/07/27/siemens-energy-baut-erstmals-gemeinsam-mit-einer-deutschen-werft-eine-2-gw-konverterplattform/226405" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 4 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 04 / 05</div>
+        <div class="signal-type">FEED-Auftrag · Exportanlage</div>
+      </div>
+      <h3 class="signal-company">thyssenkrupp Uhde</h3>
+      <div class="signal-meta">
+        <span><strong>HQ</strong>&nbsp; Dortmund, Deutschland</span>
+        <span><strong>Size</strong>&nbsp; Konzern &gt;90.000 MA</span>
+        <span><strong>Sektor</strong>&nbsp; Anlagenbau · Ammoniak-Exportinfrastruktur</span>
+        <span><strong>Datum</strong>&nbsp; 20.04.2026</span>
+      </div>
+      <p class="signal-event">
+        thyssenkrupp Uhde erhält am 20. April 2026 von Brunei Fertilizer Industries (BFI) den FEED-Auftrag für die Erweiterung der Ammoniak-Exportinfrastruktur: ein <span class="highlight">kryogener Ammoniak-Speichertank</span> sowie eine neue Exportanlage mit Kai-Integration und Schiffsladesystemen. Nadja Håkansson, COO thyssenkrupp Decarbon Technologies &amp; CEO thyssenkrupp Uhde: „BFI ist ein wichtiger Partner für uns in Asien, und dieser neue FEED-Auftrag unterstreicht ihr Vertrauen in unsere Ingenieurkompetenz." BFI-CEO Harri Kiiski bestätigt die langjährige Partnerschaft.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Die FEED-Phase ist der Moment, in dem die Logistik-Spec für die anschließende Bauphase entsteht, bevor sie sich festschreibt – Zeitfenster ca. 12–18 Monate bis zur EPC-Vergabe. Eine Exportanlage mit Kai-Integration und Schiffsladesystemen bedeutet Schwergut-Komponenten (Tankmodule, Kompressoren, Verladearme), die aus Deutschland/Europa nach Südostasien verschifft werden müssen – direkte Deckung mit Köster's eigenem Referenzprofil (Anlagenteile weltweit, seemäßige Verpackung, Crosstrade). Adressat: Projekteinkauf/Procurement thyssenkrupp Uhde Dortmund.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; worldfertilizer.com &middot; 20.04.2026</div>
+        <a href="https://www.worldfertilizer.com/environment/20042026/thyssenkrupp-uhde-secures-plant-expansion-contract/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 5 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 05 / 05</div>
+        <div class="signal-type">Auftragsvergabe · Wasserkraft</div>
+      </div>
+      <h3 class="signal-company">ANDRITZ Hydro</h3>
+      <div class="signal-meta">
+        <span><strong>HQ</strong>&nbsp; Graz, Österreich</span>
+        <span><strong>Size</strong>&nbsp; Konzern &gt;29.000 MA weltweit</span>
+        <span><strong>Sektor</strong>&nbsp; Wasserkraftanlagenbau</span>
+        <span><strong>Datum</strong>&nbsp; 08.04.2026</span>
+      </div>
+      <p class="signal-event">
+        ANDRITZ Hydro erhält von CB Elektrik Üretim (CABA Group) den Auftrag für <span class="highlight">fünf Francis-Turbinen-Generator-Sätze</span> (je 64 MW) plus einen ECO-Flow-Satz (19 MW) für das 339-MW-Wasserkraftwerk Cizre in der Südost-Türkei – Konstruktion, Fertigung, Lieferung, Installation und Inbetriebnahme, Auftragswert im unteren dreistelligen Millionen-Euro-Bereich. Frank Mette, General Manager ANDRITZ Hydro Türkei: „Projekte wie Cizre zeigen, wie moderne Wasserkrafttechnologie die Transformation hin zu nachhaltigen Energiesystemen unterstützt."
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Fünf Turbinen-Generator-Sätze dieser Leistungsklasse wiegen pro Einheit typischerweise mehrere hundert Tonnen – exakt das Schwergut-Profil, das Köster im Tagesgeschäft abwickelt (vgl. eigener 150-Tonnen-Generator-Case nach Taschkent). Die Lieferung nach Cizre erfordert kombinierte See-/Schwertransport-Logistik in eine anspruchsvolle Zielregion – genau die Kompetenz, die Köster mit Referenzen wie Irak und Libyen bereits nachweist. Adressat: Projektlogistik ANDRITZ Hydro.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; windkraft-journal.de &middot; 08.04.2026</div>
+        <a href="https://www.windkraft-journal.de/2026/04/08/andritz-liefert-elektromechanischen-ausruestung-fuer-ein-neues-wasserkraftwerk-in-der-tuerkei/223214" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="synthesis">
+  <div class="container">
+    <div class="synthesis-label">Synthese</div>
+    <p class="synthesis-text">
+      Was diese fünf Signale verbindet: alle fünf DACH-Schwermaschinenbauer haben innerhalb von 14 Wochen einen konkreten Auftrag oder Meilenstein verbucht, bei dem die physische Bewegung von Übergrössen- und Schwergut-Komponenten unmittelbar bevorsteht – von der 700-Tonnen-Tunnelbohrmaschine in München über die Multi-Standort-Fertigung der Siemens-Energy-Konverterplattform bis zu den Turbinen-Sätzen für Cizre. <span class="em">Bei mindestens zwei der fünf Fälle – thyssenkrupp Uhde nach Südostasien und ANDRITZ Hydro in die Südost-Türkei – geht die Reise in exakt die Zielregionen-Kategorie, die Alfons Köster bereits selbst als Referenz führt.</span> Die Frage in diesen Häusern ist nicht mehr „brauchen wir einen Projektlogistik-Partner", sondern welcher Spediteur die Zerlegung, Verpackung und Verschiffung in den nächsten Quartalen übernimmt.
+    </p>
+  </div>
+</section>
+
+<section class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-block-label">Methodik</div>
+        <div class="footer-block-text">
+          Gezielte Recherche über Web-Suche und direkten Abruf der Primärquellen (Herstellerpressemitteilungen, Bahn-/Netzbetreiber-Pressemeldungen, Fachmedien), Datum und Inhalt je Signal am Original geprüft. Entscheider-Namen wurden nur übernommen, wo sie in der Primärquelle selbst genannt sind; wo kein Name öffentlich verifizierbar war, ist bewusst nur die Rolle benannt statt eine Person zu vermuten.
+        </div>
+      </div>
+      <div>
+        <div class="footer-block-label">Vorbehalt</div>
+        <div class="footer-block-text">
+          Dieser Snapshot ist eine Stichprobe, kein vollständiges TAM. Im Pipeline Assessment wird die personalisierte Account-Liste mit 50+ Konten und aktiven Signalen aufgesetzt, abgestimmt auf den ICP (Schwergut-/Projektverladung, Zielregionen, Losgrössen), den wir gemeinsam validieren.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="signature">
+  <div>Alfons Köster · Markt-Trigger-Snapshot</div>
+  <div class="sg-brand">LeadPioneer</div>
+</div>
+
+</body>
+</html>
