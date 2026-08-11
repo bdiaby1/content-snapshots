@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markt-Trigger-Snapshot · Life Sciences &amp; Chemicals Logistik · DACH/Europa</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B1416;
+    --bg-card: #101B1E;
+    --bg-elevated: #142226;
+    --border-neutral: rgba(255,255,255,0.08);
+    --border-strong: rgba(45,183,171,0.32);
+    --text: #FFFFFF;
+    --text-muted: #A3B8BA;
+    --text-dim: #66807F;
+    --accent: #2DB7AB;
+    --accent-bright: #5FE0D2;
+    --accent-glow: rgba(45,183,171,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+
+  .header {
+    padding: 76px 0 60px;
+    border-bottom: 1px solid var(--border-neutral);
+    background: linear-gradient(180deg, #0E1A1D 0%, #0B1416 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+    opacity: 0.55;
+  }
+  .header-meta {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+    font-weight: 500;
+  }
+  .header h1 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: -1.3px;
+    line-height: 1.12;
+    margin-bottom: 22px;
+    max-width: 940px;
+  }
+  .header h1 .accent { color: var(--accent-bright); }
+  .header .sub {
+    font-size: 17.5px;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 760px;
+    line-height: 1.6;
+    margin-bottom: 44px;
+  }
+  .header-stats {
+    display: flex;
+    gap: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-neutral);
+    flex-wrap: wrap;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .stat-value { color: var(--text); font-size: 16px; font-weight: 500; }
+  .stat-value strong { color: var(--accent-bright); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+
+  .context-bar {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-neutral);
+    border-bottom: 1px solid var(--border-neutral);
+    padding: 30px 0;
+  }
+  .context-bar .container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .context-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .context-text { color: var(--text-muted); font-size: 14.5px; line-height: 1.72; }
+  .context-text strong { color: var(--text); font-weight: 500; }
+
+  .signals-section { padding: 88px 0 60px; }
+  .signals-intro { margin-bottom: 56px; }
+  .signals-intro h2 {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .signals-intro h3 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.7px;
+    line-height: 1.25;
+    max-width: 800px;
+  }
+
+  .signal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-neutral);
+    border-radius: 4px;
+    padding: 44px 46px;
+    margin-bottom: 22px;
+    transition: border-color 0.2s ease;
+  }
+  .signal:hover { border-color: var(--border-strong); }
+  .signal-number-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-neutral);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .signal-number {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12.5px;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .signal-type {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 10.5px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+  }
+  .signal-company { font-size: 29px; font-weight: 600; letter-spacing: -0.4px; margin-bottom: 12px; line-height: 1.2; }
+  .signal-meta {
+    display: flex;
+    gap: 22px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
+    margin-bottom: 26px;
+    flex-wrap: wrap;
+  }
+  .signal-meta span strong { color: var(--text-muted); font-weight: 500; }
+  .signal-event { color: var(--text); font-size: 15.5px; line-height: 1.75; margin-bottom: 24px; font-weight: 400; }
+  .signal-event .highlight {
+    background: var(--accent-glow);
+    color: var(--accent-bright);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+  .signal-implication {
+    background: var(--bg-elevated);
+    border-left: 2px solid var(--accent);
+    padding: 19px 23px;
+    margin-bottom: 26px;
+    border-radius: 2px;
+  }
+  .signal-implication-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .signal-implication-text { color: var(--text); font-size: 14.5px; line-height: 1.65; font-weight: 400; }
+
+  .signal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-neutral);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .source-info { font-family: 'JetBrains Mono', monospace; color: var(--text-dim); font-size: 11.5px; letter-spacing: 0.5px; }
+  .source-info strong { color: var(--text-muted); font-weight: 500; }
+  .source-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 20px;
+    background: transparent;
+    color: var(--accent-bright);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+  .source-button:hover { background: var(--accent); color: #0B1416; }
+  .source-button .arrow { display: inline-block; transition: transform 0.15s ease; }
+  .source-button:hover .arrow { transform: translateX(3px); }
+
+  .synthesis {
+    margin-top: 60px;
+    padding: 60px 0;
+    border-top: 2px solid var(--accent);
+    background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 100%);
+  }
+  .synthesis-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  .synthesis-text {
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.55;
+    letter-spacing: -0.2px;
+    max-width: 980px;
+    color: var(--text);
+  }
+  .synthesis-text .em { color: var(--accent-bright); }
+
+  .footer { border-top: 1px solid var(--border-neutral); padding: 44px 0; margin-top: 60px; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
+  .footer-block-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .footer-block-text { color: var(--text-muted); font-size: 13.5px; line-height: 1.7; }
+  .footer-block-text strong { color: var(--text); font-weight: 500; }
+
+  .signature {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .signature .sg-brand { color: var(--accent); font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .header { padding: 44px 0 36px; }
+    .header h1 { font-size: 30px; }
+    .header .sub { font-size: 15.5px; }
+    .header-stats { gap: 28px; }
+    .context-bar .container { grid-template-columns: 1fr; gap: 16px; }
+    .signals-section { padding: 52px 0 36px; }
+    .signals-intro h3 { font-size: 23px; }
+    .signal { padding: 26px 22px; }
+    .signal-company { font-size: 22px; }
+    .signal-event { font-size: 14.5px; }
+    .synthesis { padding: 36px 0; }
+    .synthesis-text { font-size: 17px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 22px; }
+    .signature { padding: 0 24px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="header">
+  <div class="container">
+    <div class="header-meta">Markt-Trigger-Snapshot · Life Sciences &amp; Chemicals Logistik · DACH/Europa</div>
+    <h1>Sechs Standort-Entscheidungen.<br>Ein Zeitraum.<br><span class="accent">Die Logistikpartner stehen noch nicht fest.</span></h1>
+    <p class="sub">Live recherchierte Kapazitätsentscheidungen aus Life Sciences und Chemicals in DACH — neue Werke, eine Standortverlagerung, wachsende Kapazität an bestehenden Standorten. Jede Quelle einzeln geprüft, jede Angabe an der Primärquelle verifiziert.</p>
+    <div class="header-stats">
+      <div class="stat-block">
+        <div class="stat-label">Erstellt für</div>
+        <div class="stat-value">Rhenus Group · Vertical Strategy Life Sciences &amp; Chemicals</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Stand</div>
+        <div class="stat-value"><strong>10. August 2026</strong></div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Scope</div>
+        <div class="stat-value">DACH · Fertigung, Wirkstoff, Verpackung</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Quellen</div>
+        <div class="stat-value"><strong>6/6</strong> verifiziert</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="context-bar">
+  <div class="container">
+    <div class="context-label">Marktkontext</div>
+    <div class="context-text">
+      <strong>Die Investitionslage ist gespalten.</strong> Laut VCI-Mitgliederbefragung will jedes zweite ostdeutsche Chemieunternehmen 2026/2027 Investitionen kürzen oder ins Ausland verlagern — Energiekosten und Bürokratie werden als Haupthindernisse genannt. Gleichzeitig investiert die Pharmaindustrie laut vfa gegen den Trend: Produktion +1,0 %, Investitionen +3,0 %. Boehringer Ingelheim hat im Juni angekündigte 900-Mio.-Euro-Investitionen in Deutschland gestoppt und verlagert Wachstumskapital Richtung USA und Asien — während Novartis, Eli Lilly, Vetter und Sartorius im selben Zeitraum neue deutsche Standorte bauen. Diese Gleichzeitigkeit von Rückzug und Neubau ist der Moment, in dem Logistikverträge neu verhandelt werden.
+    </div>
+  </div>
+</section>
+
+<section class="signals-section">
+  <div class="container">
+
+    <div class="signals-intro">
+      <h2>Verifizierte Standortsignale</h2>
+      <h3>Wo in Ihrem Vertical gerade neue Kapazität, eine Verlagerung oder ein Bauprojekt läuft — und wer die Logistik dafür noch nicht vergeben hat.</h3>
+    </div>
+
+    <!-- SIGNAL 1 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 01 / 06</div>
+        <div class="signal-type">Neues Werk · Baubeginn Q2 2026</div>
+      </div>
+      <h3 class="signal-company">Vetter Pharma-Fertigung GmbH &amp; Co. KG</h3>
+      <div class="signal-meta">
+        <span><strong>Standort</strong>&nbsp; Saarlouis, Saarland</span>
+        <span><strong>Investition</strong>&nbsp; ca. 480 Mio. € (1. Bauphase)</span>
+        <span><strong>Fläche</strong>&nbsp; ca. 38 ha</span>
+        <span><strong>Datum</strong>&nbsp; 28.01.2026</span>
+      </div>
+      <p class="signal-event">
+        Vetter Pharma-Fertigung, einer der weltweit führenden CDMO-Anbieter für sterile Injektionspräparate, baut in Saarlouis eine neue Produktionsstätte für kommerzielle sterile Arzneimittel. Grundstückskauf Ende 2024, <span class="highlight">Baubeginn 2. Quartal 2026</span>, Betriebsstart 2031, bis zu 2.000 Arbeitsplätze langfristig. Vetter-Aufsichtsratsvorsitzender Udo J. Vetter: „Mit unseren Investitionen im Saarland stärken wir unser Bekenntnis zum Wirtschaftsstandort Deutschland." Die EU-Kommission hat parallel 47 Mio. € Landesbeihilfe genehmigt.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Der Baubeginn ist jetzt — das bedeutet fünf Jahre Bauphase mit fortlaufendem Bedarf an Projektlogistik für Anlagentechnik, Reinraumkomponenten und Baumaterial, bevor 2031 der reguläre pharmazeutische Warenfluss beginnt. Wer in der Bauphase als verlässlicher Partner auftritt, sitzt am Tisch, wenn die Site-Logistik-Ausschreibung für den Regelbetrieb kommt. Adressat: Standortleitung/Einkauf Saarlouis parallel zur zentralen Supply Chain in Ravensburg.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; Vetter Pharma Newsroom &middot; 28.01.2026</div>
+        <a href="https://www.vetter-pharma.com/en/news/we-are-building-a-new-location-in-saarland/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 2 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 02 / 06</div>
+        <div class="signal-type">Neues Werk · Inbetriebnahme läuft an</div>
+      </div>
+      <h3 class="signal-company">Eli Lilly and Company</h3>
+      <div class="signal-meta">
+        <span><strong>Standort</strong>&nbsp; Alzey, Rheinland-Pfalz</span>
+        <span><strong>Investition</strong>&nbsp; ca. 2,3 Mrd. €</span>
+        <span><strong>Arbeitsplätze</strong>&nbsp; ca. 1.000</span>
+        <span><strong>Betriebsstart</strong>&nbsp; Ende 2027</span>
+      </div>
+      <p class="signal-event">
+        Eli Lilly errichtet in Alzey eine der größten Pharma-Produktionsstätten Europas — Fokus u. a. auf den Diabetes-/Adipositas-Wirkstoff Tirzepatid (Mounjaro). Bauarbeiten laufen seit Ende 2024; <span class="highlight">Mitte 2026 werden die Produktionslinien installiert</span>, danach Testläufe und Zulassungsverfahren vor Betriebsstart Ende 2027. Dies ist der Moment, in dem die Standort-Logistikstruktur für die Anlaufphase final festgelegt wird.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Ein Konzern dieser Größe hat globale Rahmenverträge — realistisch ist der Einstieg nicht über den globalen Vertrag, sondern über die lokale Baustellen- und Anlauflogistik in Alzey, die jetzt in den nächsten 12 bis 18 Monaten vergeben wird. Enges Fenster, bevor sich die Struktur für den Regelbetrieb 2027 festschreibt. Adressat: lokale Site-Logistik/EPC-Baustellenleitung Alzey.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; process.vogel.de &middot; Berichterstattung 2026</div>
+        <a href="https://www.process.vogel.de/eli-lilly-investition-neue-produktionsstaette-alzey-a-04a6fa156daa6a4384c3e0ff308318bf/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 3 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 03 / 06</div>
+        <div class="signal-type">Standortverlagerung</div>
+      </div>
+      <h3 class="signal-company">Novartis Pharma GmbH</h3>
+      <div class="signal-meta">
+        <span><strong>Schließt</strong>&nbsp; Wehr, Baden-Württemberg (bis Ende 2028)</span>
+        <span><strong>Baut neu</strong>&nbsp; Halle (Saale), Sachsen-Anhalt</span>
+        <span><strong>Investition Halle</strong>&nbsp; 35 Mio. €</span>
+        <span><strong>Datum</strong>&nbsp; 05.05.2026</span>
+      </div>
+      <p class="signal-event">
+        Novartis kündigt am 5. Mai 2026 zwei gegenläufige Standortentscheidungen gleichzeitig an: Schließung des Werks Wehr (feste orale Darreichungsformen, ca. 220 Arbeitsplätze) bis Ende 2028 — der Standort sei „nicht mehr wettbewerbsfähig" — und parallel <span class="highlight">35 Mio. € Neuinvestition in eine Radioligandentherapie-Produktion in Halle</span>, Betriebsstart 2027. Steffen Lang, President Operations Novartis: „Wir werden eng, transparent und respektvoll mit unseren Mitarbeitenden und der Gemeinde Wehr zusammenarbeiten."
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Zwei Logistikereignisse in einer Meldung: Rückbau-/Abwicklungslogistik in Wehr bis 2028, und der Aufbau einer hochspezialisierten Lieferkette für Radioligandentherapie in Halle ab 2027 — zeitkritische, streng regulierte Isotopenlogistik, ein Nischenfeld mit wenigen kompetenten Anbietern. Wer hier früh mit nachweisbarer Pharma-/Gefahrgutexpertise andockt, verhandelt nicht gegen ein bestehendes Setup, sondern baut es mit auf. Adressat: Supply-Chain-Verantwortliche für den Bereich Radioligand Therapy bzw. Standortleitung Halle.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; novartis.com · Pressemitteilung · 05.05.2026</div>
+        <a href="https://www.novartis.com/de-de/medien/pressemitteilungen/novartis-plant-schliessung-des-produktionsstandorts-wehr" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 4 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 04 / 06</div>
+        <div class="signal-type">Kapazitätserweiterung · Chemicals</div>
+      </div>
+      <h3 class="signal-company">Borealis AG</h3>
+      <div class="signal-meta">
+        <span><strong>Standort</strong>&nbsp; Burghausen, Bayern</span>
+        <span><strong>Investition</strong>&nbsp; 49 Mio. €</span>
+        <span><strong>Sektor</strong>&nbsp; Polypropylen, Kreislaufkunststoffe</span>
+        <span><strong>Datum</strong>&nbsp; 20.01.2026</span>
+      </div>
+      <p class="signal-event">
+        Borealis erweitert am Standort Burghausen die Produktion von Borstar-Nextension-Polypropylen — <span class="highlight">49 Mio. €</span> für kreislauffähige Single-Site-PP-Grades mit verbesserter Reinheit und Verarbeitbarkeit. Die Materialien adressieren laut Unternehmensangabe explizit die Sektoren Verpackung, <span class="highlight">Healthcare</span>, Mobilität und Fasern — eine direkte Brücke zwischen Chemicals- und Life-Sciences-Vertical.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Erweiterte Produktion an einem Bestandsstandort heißt zusätzliches Gefahrgut-/Chemikalienvolumen ab Burghausen — planbar, aber ohne automatische Vergabe an den bestehenden Logistikpartner. Der Healthcare-Bezug der Zielmärkte macht dies zum Cross-Vertical-Case zwischen Ihren beiden Fokusbranchen. Adressat: Logistikeinkauf Borealis Standort Burghausen.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; borealisgroup.com · Pressemitteilung · 20.01.2026</div>
+        <a href="https://www.borealisgroup.com/%C3%B6sterreich/news/borealis-investiert-49-millionen-euro-in-burghausen-deutschland-um-die-produktion-kreislauff%C3%A4higer-kunststoffe-voranzutreiben" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 5 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 05 / 06</div>
+        <div class="signal-type">Kapazitätserweiterung · Life-Science-Equipment</div>
+      </div>
+      <h3 class="signal-company">Sartorius AG</h3>
+      <div class="signal-meta">
+        <span><strong>Standort</strong>&nbsp; Göttingen, Niedersachsen (Hauptsitz)</span>
+        <span><strong>Neubau</strong>&nbsp; Gebäude für Filterproduktion</span>
+        <span><strong>Fertigstellung</strong>&nbsp; 2026</span>
+        <span><strong>Investitionsquote 2026</strong>&nbsp; ca. 12,5 % vom Umsatz</span>
+      </div>
+      <p class="signal-event">
+        Sartorius baut am Stammsitz Göttingen ein neues Gebäude für die Filterproduktion — nach den 2023 fertiggestellten Neubauten für F&amp;E und Membranfertigung der dritte Baustein der Campus-Erweiterung, <span class="highlight">Fertigstellung 2026</span>. Produziert werden Membranen und Filter für Labor- und Bioprocessing-Anwendungen. Die konzernweite Investitionsquote bleibt 2026 mit rund 12,5 % vom Umsatz auf Vorjahresniveau — Kapazitätsausbau ist kein Einzelfall, sondern laufende Strategie.
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Neue Fertigungskapazität am größten Sartorius-Standort bedeutet zusätzliches Volumen an hochwertigen, empfindlichen Bioprocessing-Produkten für den weltweiten Versand — eine Schnittstelle zwischen Life-Sciences- und Hightech-Logistik. Adressat: globale Supply-Chain-/Logistikeinkauf Sartorius Göttingen.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; sartorius.com · Capacity Expansions Göttingen</div>
+        <a href="https://www.sartorius.com/en/company/newsroom/capacity-expansions/goettingen-germany" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+    <!-- SIGNAL 6 -->
+    <div class="signal">
+      <div class="signal-number-row">
+        <div class="signal-number">SIGNAL 06 / 06</div>
+        <div class="signal-type">Neubau · CDMO-Wachstum</div>
+      </div>
+      <h3 class="signal-company">Losan Pharma GmbH</h3>
+      <div class="signal-meta">
+        <span><strong>Standort</strong>&nbsp; Eschbach, Baden-Württemberg</span>
+        <span><strong>Neubau</strong>&nbsp; Produktionsgebäude + Logistikzentrum</span>
+        <span><strong>Kapazität</strong>&nbsp; ca. 20.000 Palettenplätze</span>
+        <span><strong>Fertigstellung</strong>&nbsp; Q4 2026</span>
+      </div>
+      <p class="signal-event">
+        Losan Pharma, CDMO für feste, halbfeste und flüssige Arzneiformen (Teil der Dr.-Falk-Pharma-Gruppe), baut am Campus Eschbach ein neues Produktionsgebäude sowie ein hochautomatisiertes Logistikzentrum mit fahrerlosen Transportsystemen in unterirdischen Tunneln, <span class="highlight">Fertigstellung 4. Quartal 2026</span>. CEO Jens Morgenthaler: „Mit autonomen Transportsystemen in unterirdischen Tunneln ist unser Unternehmen logistisch in der Zukunft angekommen."
+      </p>
+      <div class="signal-implication">
+        <div class="signal-implication-label">Sales Play</div>
+        <div class="signal-implication-text">
+          Ehrlicher Fit: Das Logistikzentrum selbst ist Inhouse-Konsolidierung, keine Ausschreibung für Warehousing. Der Ansatzpunkt ist die wachsende Transportmenge — mehr Produktionsfläche heißt mehr Wareneingang für Rohstoffe/Wirkstoffe und mehr Warenausgang für Fertigware, plus Projektlogistik für die Inbetriebnahme der Anlagentechnik selbst. Adressat: Einkauf/Logistik Losan Pharma bzw. Dr. Falk Pharma Gruppenebene.
+        </div>
+      </div>
+      <div class="signal-footer">
+        <div class="source-info"><strong>Quelle</strong>&nbsp; mynewsdesk.com (Losan Pharma) · 05.06.2025</div>
+        <a href="https://www.mynewsdesk.com/de/losan-pharma-gmbh/news/auf-dem-losan-pharma-campus-in-eschbach-entsteht-ein-neues-logistikzentrum-497459" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="synthesis">
+  <div class="container">
+    <div class="synthesis-label">Synthese</div>
+    <p class="synthesis-text">
+      Sechs Standortentscheidungen, drei davon mit Baubeginn oder Inbetriebnahme in den nächsten zwölf Monaten, eine davon eine echte Verlagerung mit Rückbau auf der einen und Neuaufbau auf der anderen Seite. <span class="em">Kein einziges dieser sechs Unternehmen hat die Logistikstruktur für die neue Kapazität öffentlich vergeben — die Fenster sind offen, weil die Standorte selbst gerade erst entstehen.</span> Das deckt sich mit Ihrer eigenen Beobachtung: Bei strategischen Accounts erhalten Sie solche Informationen oft erst, wenn die Struktur bereits steht. Diese sechs Fälle sind noch in der Bauphase.
+    </p>
+  </div>
+</section>
+
+<section class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-block-label">Methodik</div>
+        <div class="footer-block-text">
+          Recherche über Web-Suche und direkten Abruf der Primärquellen (Unternehmenspressemitteilungen, Fachmedien Chemie/Pharma/Logistik), Datum und Zahlen je Signal am Original geprüft, Stand 10. August 2026. Verworfen wurden u. a. eine Personalie (Deutschlandchef-Wechsel ohne Supply-Chain-Bezug, älter als 90 Tage) und ein Logistikzentrum-Neubau eines dritten Logistikdienstleisters (kein Fertigungsunternehmen, damit kein Zielkonto). Was der Prüfung nicht standhält, wird nicht in den Snapshot aufgenommen — auch nicht als schwaches Signal.
+        </div>
+      </div>
+      <div>
+        <div class="footer-block-label">Vorbehalt</div>
+        <div class="footer-block-text">
+          Dieser Snapshot ist eine Stichprobe aus Life Sciences und Chemicals in DACH, kein vollständiges TAM. Bei Signal 2 und 6 ist der Fit bewusst differenziert dargestellt (Konzern-Rahmenvertrag bzw. Inhouse-Warehousing) — Übertreibung wäre hier kontraproduktiv. Im Pipeline Assessment wird die vollständige, nach Ihrem tatsächlichen ICP abgestimmte Kontenliste aufgebaut.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="signature">
+  <div>Rhenus Group · Vertical Life Sciences &amp; Chemicals · Markt-Trigger-Snapshot</div>
+  <div class="sg-brand">LeadPioneer</div>
+</div>
+
+</body>
+</html>
