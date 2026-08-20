@@ -3,22 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Markt-Trigger-Snapshot · DACH Schwergut- &amp; Projektlogistik · Juli 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Markt-Trigger-Snapshot · DACH Schwergut- &amp; Projektlogistik</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0B1116;
-    --bg-card: #10171E;
-    --bg-elevated: #141D25;
-    --border: rgba(232,163,61,0.14);
-    --border-strong: rgba(232,163,61,0.30);
-    --border-neutral: rgba(255,255,255,0.08);
-    --text: #FFFFFF;
-    --text-muted: #9BA9B4;
-    --text-dim: #66757F;
-    --accent: #E8A33D;
-    --accent-bright: #FFC670;
-    --accent-glow: rgba(232,163,61,0.12);
+    --navy: #16244A;
+    --navy-deep: #0F1B38;
+    --blue: #2F5FDE;
+    --blue-dark: #16296B;
+    --amber: #F5A623;
+    --amber-bright: #FFC155;
+    --bg: #FFFFFF;
+    --bg-soft: #F6F8FC;
+    --card-border: #E5EAF3;
+    --text: #16244A;
+    --text-muted: #5B6B87;
+    --text-dim: #8A97AC;
+    --shadow: 0 4px 18px rgba(22,36,74,0.06);
+    --shadow-md: 0 10px 30px rgba(22,36,74,0.09);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -32,322 +35,391 @@
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
-  .container { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+  h1, h2, h3, .brand-font { font-family: 'Poppins', 'Inter', sans-serif; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 40px; }
+  a { color: inherit; }
 
-  /* HEADER */
-  .header {
-    padding: 80px 0 64px;
-    border-bottom: 1px solid var(--border-neutral);
-    background: linear-gradient(180deg, #0E141A 0%, #0B1116 100%);
+  .site-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  .site-header-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .site-nav { display: flex; gap: 30px; flex: 1; }
+  .site-nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .15s ease;
+  }
+  .site-nav a:hover { color: var(--blue); }
+  .site-nav.right { justify-content: flex-end; }
+  .site-logo { display: flex; flex-direction: column; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .site-logo img { height: 34px; display: block; }
+  .site-cta {
+    flex-shrink: 0;
+    background: var(--amber);
+    color: var(--navy-deep);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(245,166,35,0.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .site-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(245,166,35,0.45); }
+
+  @media (max-width: 860px) {
+    .site-nav { display: none; }
+    .site-header-inner { justify-content: space-between; padding: 14px 22px; }
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 65%, var(--navy-deep) 100%);
+    padding: 68px 0 52px;
     position: relative;
     overflow: hidden;
   }
-  .header::before {
+  .hero::after {
     content: "";
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
-    opacity: 0.55;
+    right: -120px; top: -160px;
+    width: 460px; height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 70%);
   }
-  .header-meta {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    font-weight: 500;
-  }
-  .header h1 {
-    font-size: 54px;
-    font-weight: 700;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    margin-bottom: 24px;
-    max-width: 900px;
-  }
-  .header h1 .accent { color: var(--accent); }
-  .header .sub {
-    font-size: 19px;
-    color: var(--text-muted);
-    font-weight: 300;
-    max-width: 720px;
-    line-height: 1.55;
-    margin-bottom: 48px;
-  }
-  .header-stats {
-    display: flex;
-    gap: 64px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border-neutral);
-    flex-wrap: wrap;
-  }
-  .stat-label {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--text-dim);
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .stat-value { color: var(--text); font-size: 16px; font-weight: 500; }
-  .stat-value strong { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
-
-  /* CONTEXT BAR */
-  .context-bar {
-    background: var(--bg-elevated);
-    border-top: 1px solid var(--border-neutral);
-    border-bottom: 1px solid var(--border-neutral);
-    padding: 32px 0;
-  }
-  .context-bar .container {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .context-label {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  .context-text { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
-  .context-text strong { color: var(--text); font-weight: 500; }
-
-  /* SIGNALS */
-  .signals-section { padding: 96px 0 64px; }
-  .signals-intro { margin-bottom: 64px; }
-  .signals-intro h2 {
+  .hero-eyebrow {
+    font-family: 'Poppins', sans-serif;
     font-size: 13px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
-    letter-spacing: 3px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: 600;
+    color: var(--amber-bright);
     margin-bottom: 20px;
   }
-  .signals-intro h3 {
-    font-size: 34px;
-    font-weight: 600;
-    letter-spacing: -0.8px;
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
     line-height: 1.2;
+    color: #FFFFFF;
+    max-width: 820px;
+    margin-bottom: 20px;
+  }
+  .hero h1 .accent { color: var(--amber-bright); }
+  .hero .sub {
+    font-size: 16.5px;
+    color: rgba(255,255,255,0.82);
+    font-weight: 300;
+    max-width: 720px;
+    line-height: 1.65;
+    margin-bottom: 36px;
+  }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero-stat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 12px;
+    padding: 14px 20px;
+    backdrop-filter: blur(6px);
+    min-width: 170px;
+  }
+  .hero-stat .k {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+  }
+  .hero-stat .v { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+  .hero-stat .v strong { color: var(--amber-bright); font-family: 'Poppins', sans-serif; }
+
+  .context-bar { background: var(--bg-soft); padding: 30px 0; border-bottom: 1px solid var(--card-border); }
+  .context-bar .container { display: grid; grid-template-columns: 190px 1fr; gap: 40px; align-items: start; }
+  .context-label {
+    font-family: 'Poppins', sans-serif;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+  .context-text { color: var(--text-muted); font-size: 14.5px; line-height: 1.75; }
+  .context-text strong { color: var(--text); font-weight: 600; }
+
+  .signals-section { padding: 64px 0 48px; }
+  .signals-intro { margin-bottom: 44px; }
+  .signals-intro h2 {
+    font-size: 12.5px;
+    color: var(--blue);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .signals-intro h3 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    line-height: 1.35;
     max-width: 760px;
+    color: var(--navy);
   }
 
   .signal {
-    background: var(--bg-card);
-    border: 1px solid var(--border-neutral);
-    border-radius: 4px;
-    padding: 48px 48px;
-    margin-bottom: 24px;
-    transition: border-color 0.2s ease;
+    background: #FFFFFF;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 38px 40px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
-  .signal:hover { border-color: var(--border-strong); }
+  .signal:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
   .signal-number-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    gap: 16px;
+    margin-bottom: 22px;
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-neutral);
+    border-bottom: 1px solid var(--card-border);
     flex-wrap: wrap;
-    gap: 12px;
   }
-  .signal-number {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: 600;
+  .signal-badge {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
   .signal-type {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--text-dim);
+    font-family: 'Poppins', sans-serif;
+    color: var(--blue);
     font-size: 11px;
-    letter-spacing: 2px;
+    font-weight: 600;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 4px 12px;
-    border: 1px solid var(--border-strong);
-    border-radius: 2px;
+    background: #EEF3FF;
+    padding: 5px 12px;
+    border-radius: 20px;
   }
-  .signal-company { font-size: 32px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 12px; line-height: 1.2; }
+  .signal-type.live { color: #B4720A; background: #FFF3DE; }
+  .signal-company { font-size: 25px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 12px; color: var(--navy); line-height: 1.25; }
   .signal-meta {
     display: flex;
-    gap: 24px;
-    font-family: 'JetBrains Mono', monospace;
+    gap: 20px;
     color: var(--text-dim);
-    font-size: 12px;
-    letter-spacing: 1px;
-    margin-bottom: 28px;
+    font-size: 12.5px;
+    font-weight: 500;
+    margin-bottom: 22px;
     flex-wrap: wrap;
   }
-  .signal-meta span strong { color: var(--text-muted); font-weight: 500; }
-  .signal-event { color: var(--text); font-size: 17px; line-height: 1.7; margin-bottom: 28px; font-weight: 400; }
+  .signal-meta span strong { color: var(--text-muted); font-weight: 600; }
+  .signal-event { color: var(--text); font-size: 15px; line-height: 1.75; margin-bottom: 22px; font-weight: 400; }
   .signal-event .highlight {
-    background: var(--accent-glow);
-    color: var(--accent-bright);
-    padding: 2px 6px;
-    border-radius: 2px;
-    font-weight: 500;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-  }
-  .signal-implication {
-    background: var(--bg-elevated);
-    border-left: 2px solid var(--accent);
-    padding: 20px 24px;
-    margin-bottom: 28px;
-    border-radius: 2px;
-  }
-  .signal-implication-label {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
+    background: #FFF3DE;
+    color: #B4720A;
+    padding: 2px 7px;
+    border-radius: 5px;
     font-weight: 600;
   }
-  .signal-implication-text { color: var(--text); font-size: 15px; line-height: 1.6; font-weight: 400; }
+  .signal-implication {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--amber);
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    border-radius: 0 10px 10px 0;
+  }
+  .signal-implication-label {
+    font-family: 'Poppins', sans-serif;
+    color: var(--navy);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .signal-implication-text { color: var(--text-muted); font-size: 14px; line-height: 1.65; }
 
   .signal-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 24px;
-    border-top: 1px solid var(--border-neutral);
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 14px;
   }
-  .source-info { font-family: 'JetBrains Mono', monospace; color: var(--text-dim); font-size: 12px; letter-spacing: 1px; }
-  .source-info strong { color: var(--text-muted); font-weight: 500; }
+  .source-info { color: var(--text-dim); font-size: 12px; }
+  .source-info strong { color: var(--text-muted); font-weight: 600; }
   .source-button {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
+    gap: 8px;
+    padding: 10px 18px;
     background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: 2px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 500;
+    color: var(--blue);
+    border: 1.5px solid var(--blue);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
     text-decoration: none;
     transition: all 0.15s ease;
-    cursor: pointer;
   }
-  .source-button:hover { background: var(--accent); color: #0B1116; }
-  .source-button .arrow { display: inline-block; transition: transform 0.15s ease; }
+  .source-button:hover { background: var(--blue); color: #fff; }
+  .source-button .arrow { transition: transform 0.15s ease; }
   .source-button:hover .arrow { transform: translateX(3px); }
 
-  /* SYNTHESIS */
+  .synthesis-wrap { padding: 12px 0 56px; }
   .synthesis {
-    margin-top: 64px;
-    padding: 64px 0;
-    border-top: 2px solid var(--accent);
-    background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 100%);
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--blue-dark) 100%);
+    border-radius: 20px;
+    padding: 46px 48px;
+    box-shadow: var(--shadow-md);
   }
   .synthesis-label {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
+    font-family: 'Poppins', sans-serif;
+    color: var(--amber-bright);
     font-size: 12px;
-    letter-spacing: 3px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    margin-bottom: 32px;
-    font-weight: 600;
+    margin-bottom: 20px;
   }
   .synthesis-text {
-    font-size: 25px;
+    font-size: 19.5px;
     font-weight: 500;
-    line-height: 1.5;
-    letter-spacing: -0.3px;
-    max-width: 980px;
-    color: var(--text);
+    line-height: 1.6;
+    color: #FFFFFF;
+    max-width: 900px;
   }
-  .synthesis-text .em { color: var(--accent-bright); }
+  .synthesis-text .em { color: var(--amber-bright); font-weight: 600; }
 
-  /* FOOTER */
-  .footer { border-top: 1px solid var(--border-neutral); padding: 48px 0; margin-top: 64px; }
-  .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .bottom-cta {
+    background: var(--bg-soft);
+    padding: 56px 0;
+    text-align: center;
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .bottom-cta h3 { font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+  .bottom-cta p { color: var(--text-muted); font-size: 15px; margin-bottom: 26px; }
+  .bottom-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--amber);
+    color: var(--navy-deep);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    padding: 15px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(245,166,35,0.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .bottom-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.45); }
+
+  .footer { padding: 44px 0; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
   .footer-block-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Poppins', sans-serif;
     color: var(--text-dim);
-    font-size: 11px;
-    letter-spacing: 2px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
     margin-bottom: 12px;
-    font-weight: 600;
   }
-  .footer-block-text { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
-  .footer-block-text strong { color: var(--text); font-weight: 500; }
+  .footer-block-text { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+  .footer-block-text strong { color: var(--text); font-weight: 600; }
 
   .signature {
-    max-width: 1180px;
+    max-width: 1160px;
     margin: 0 auto;
-    padding: 0 48px 56px;
+    padding: 0 40px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 11.5px;
     color: var(--text-dim);
-    letter-spacing: 2px;
-    text-transform: uppercase;
     flex-wrap: wrap;
     gap: 8px;
   }
-  .signature .sg-brand { color: var(--accent); font-weight: 600; }
+  .signature .sg-brand { color: var(--blue); font-weight: 600; }
 
   @media (max-width: 900px) {
-    .container { padding: 0 24px; }
-    .header { padding: 48px 0 40px; }
-    .header h1 { font-size: 32px; }
-    .header .sub { font-size: 16px; }
-    .header-stats { gap: 32px; }
-    .context-bar .container { grid-template-columns: 1fr; gap: 16px; }
-    .signals-section { padding: 56px 0 40px; }
-    .signals-intro h3 { font-size: 24px; }
-    .signal { padding: 28px 24px; }
-    .signal-company { font-size: 24px; }
-    .signal-event { font-size: 15px; }
-    .synthesis { padding: 40px 0; }
-    .synthesis-text { font-size: 18px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-    .signature { padding: 0 24px 40px; }
+    .container { padding: 0 22px; }
+    .hero { padding: 44px 0 36px; }
+    .hero h1 { font-size: 28px; }
+    .hero .sub { font-size: 15px; }
+    .context-bar .container { grid-template-columns: 1fr; gap: 14px; }
+    .signals-section { padding: 44px 0 30px; }
+    .signals-intro h3 { font-size: 21px; }
+    .signal { padding: 26px 22px; }
+    .signal-company { font-size: 21px; }
+    .synthesis { padding: 30px 26px; border-radius: 16px; }
+    .synthesis-text { font-size: 16.5px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+    .signature { padding: 0 22px 32px; }
+    .bottom-cta { padding: 40px 0; }
   }
 </style>
 </head>
 <body>
 
-<section class="header">
+<header class="site-header">
+  <div class="site-header-inner">
+    <nav class="site-nav">
+      <a href="https://leadpioneer.de/#kundenstimmen">Kundenstimmen</a>
+      <a href="https://leadpioneer.de/#power-loop">M³ Power Loop</a>
+    </nav>
+    <a class="site-logo" href="https://leadpioneer.de" target="_blank" rel="noopener noreferrer">
+      <img src="data:image/png;base64,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" alt="LeadPioneer">
+    </a>
+    <nav class="site-nav right">
+      <a href="https://leadpioneer.de/#roi-rechner">ROI-Rechner</a>
+      <a href="https://leadpioneer.de/#mission">Unsere Mission</a>
+    </nav>
+    <a class="site-cta" href="https://leadpioneer.de" target="_blank" rel="noopener noreferrer">Assessment buchen →</a>
+  </div>
+</header>
+
+<section class="hero">
   <div class="container">
-    <div class="header-meta">Markt-Trigger-Snapshot · DACH Schwergut- &amp; Projektlogistik</div>
-    <h1>Fünf Aufträge.<br>Vierzehn Wochen.<br><span class="accent">Eine Schwergut-Welle.</span></h1>
+    <div class="hero-eyebrow">Markt-Trigger-Snapshot · DACH Schwergut- &amp; Projektlogistik</div>
+    <h1>Fünf Aufträge. Vierzehn Wochen. <span class="accent">Eine Schwergut-Welle.</span></h1>
     <p class="sub">Live recherchierte Bedarfssignale aus dem DACH-Schwermaschinen- und Anlagenbau, die sich auf das adressierbare Universum von Alfons Köster zubewegen: Tunnelbohrmaschinen, Turbinen-Generator-Sätze, Offshore-Konverterkomponenten und Exportanlagen mit konkretem Verschiffungs- und Schwertransport-Bedarf.</p>
-    <div class="header-stats">
-      <div class="stat-block">
-        <div class="stat-label">Erstellt für</div>
-        <div class="stat-value">alfons-koester.de · Discovery Call</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-label">Stand</div>
-        <div class="stat-value"><strong>29. Juli 2026</strong></div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-label">Geographischer Scope</div>
-        <div class="stat-value">DACH · Fertigung → weltweite Zielmärkte</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-label">Quellen</div>
-        <div class="stat-value"><strong>5/5</strong> verifiziert</div>
-      </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="k">Erstellt für</div><div class="v">alfons-koester.de · Discovery Call</div></div>
+      <div class="hero-stat"><div class="k">Stand</div><div class="v"><strong>29. Juli 2026</strong></div></div>
+      <div class="hero-stat"><div class="k">Scope</div><div class="v">DACH · Fertigung → weltweite Zielmärkte</div></div>
+      <div class="hero-stat"><div class="k">Quellen</div><div class="v"><strong>5/5</strong> verifiziert</div></div>
     </div>
   </div>
 </section>
@@ -356,7 +428,7 @@
   <div class="container">
     <div class="context-label">Marktkontext</div>
     <div class="context-text">
-      <strong>Der deutsche Maschinenbau meldet laut VDMA im März 2026 ein reales Auftragsplus von 27 Prozent, das Auslandsgeschäft legt um 31 Prozent zu.</strong> Was in den Auftragsmeldungen selten sichtbar wird: jede dieser Bestellungen erzeugt ein physisches Problem – Turbinen, Konverter, Bohrköpfe und Exportanlagen-Module müssen zerlegt, seemäßig verpackt und zum Teil in anspruchsvolle Zielregionen verschifft werden, bevor der Auftrag als erfüllt gilt. Die folgenden fünf Signale verorten sich vor diesem Hintergrund.
+      <strong>Der deutsche Maschinenbau meldet laut VDMA im März 2026 ein reales Auftragsplus von 27 Prozent, das Auslandsgeschäft legt um 31 Prozent zu.</strong> Was in den Auftragsmeldungen selten sichtbar wird: Jede dieser Bestellungen erzeugt ein physisches Problem — Turbinen, Konverter, Bohrköpfe und Exportanlagen-Module müssen zerlegt, seemäßig verpackt und zum Teil in anspruchsvolle Zielregionen verschifft werden, bevor der Auftrag als erfüllt gilt. Die folgenden fünf Signale verorten sich vor diesem Hintergrund.
     </div>
   </div>
 </section>
@@ -366,19 +438,19 @@
 
     <div class="signals-intro">
       <h2>Verifizierte Bedarfssignale</h2>
-      <h3>Was sich in den letzten 14 Wochen in Ihrem Markt bewegt hat.</h3>
+      <h3>Was sich in den letzten 14 Wochen in Ihrem Markt bewegt hat — und wo die Transportvergabe noch offen ist.</h3>
     </div>
 
     <!-- SIGNAL 1 -->
     <div class="signal">
       <div class="signal-number-row">
-        <div class="signal-number">SIGNAL 01 / 05</div>
-        <div class="signal-type">Maschinenübergabe</div>
+        <div class="signal-badge">1</div>
+        <div class="signal-type">Maschinenübergabe · 21.05.2026</div>
       </div>
       <h3 class="signal-company">Herrenknecht AG</h3>
       <div class="signal-meta">
         <span><strong>HQ</strong>&nbsp; Schwanau, Deutschland</span>
-        <span><strong>Size</strong>&nbsp; ~5.500 MA weltweit</span>
+        <span><strong>Größe</strong>&nbsp; ~5.500 MA weltweit</span>
         <span><strong>Sektor</strong>&nbsp; Tunnelbohrmaschinenbau</span>
         <span><strong>Datum</strong>&nbsp; 21.05.2026</span>
       </div>
@@ -393,20 +465,20 @@
       </div>
       <div class="signal-footer">
         <div class="source-info"><strong>Quelle</strong>&nbsp; deutschebahn.com &middot; 21.05.2026</div>
-        <a href="https://www.deutschebahn.com/de/presse/presse-regional/pr-muenchen-de/aktuell/presseinformationen/178-Meter-Hightech-fuer-Muenchen-Erste-Tunnelbohrmaschine-der-2-Stammstrecke-fertig-13883042" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+        <a href="https://www.deutschebahn.com/de/presse/presse-regional/pr-muenchen-de/aktuell/presseinformationen/178-Meter-Hightech-fuer-Muenchen-Erste-Tunnelbohrmaschine-der-2-Stammstrecke-fertig-13883042" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">→</span></a>
       </div>
     </div>
 
     <!-- SIGNAL 2 -->
     <div class="signal">
       <div class="signal-number-row">
-        <div class="signal-number">SIGNAL 02 / 05</div>
-        <div class="signal-type">Grossauftrag</div>
+        <div class="signal-badge">2</div>
+        <div class="signal-type live">Großauftrag · 07.07.2026</div>
       </div>
       <h3 class="signal-company">Nordex SE</h3>
       <div class="signal-meta">
         <span><strong>HQ</strong>&nbsp; Hamburg, Deutschland</span>
-        <span><strong>Size</strong>&nbsp; ~10.000 MA weltweit</span>
+        <span><strong>Größe</strong>&nbsp; ~10.000 MA weltweit</span>
         <span><strong>Sektor</strong>&nbsp; Windenergieanlagenbau</span>
         <span><strong>Datum</strong>&nbsp; 07.07.2026</span>
       </div>
@@ -416,53 +488,53 @@
       <div class="signal-implication">
         <div class="signal-implication-label">Sales Play</div>
         <div class="signal-implication-text">
-          100 Anlagen bedeuten hunderte Rotorblatt-, Turm- und Maschinenhaus-Transporte, verteilt auf mehrere Bundesländer und Bauabschnitte bis in die Saison 2027 – klassischer Schwertransport- und Projektverladungsbedarf, der laufend an spezialisierte Sub-Logistiker vergeben wird. Adressat: Supply-Chain-/Logistikkoordination bei Nordex bzw. den beauftragten Errichtern vor Ort.
+          100 Anlagen bedeuten hunderte Rotorblatt-, Turm- und Maschinenhaus-Transporte, verteilt auf mehrere Bundesländer und Bauabschnitte bis in die Saison 2027 — klassischer Schwertransport- und Projektverladungsbedarf, der laufend an spezialisierte Sub-Logistiker vergeben wird. Adressat: Supply-Chain-/Logistikkoordination bei Nordex bzw. den beauftragten Errichtern vor Ort.
         </div>
       </div>
       <div class="signal-footer">
         <div class="source-info"><strong>Quelle</strong>&nbsp; nordex-online.com &middot; 07.07.2026</div>
-        <a href="https://www.nordex-online.com/de/2026/07/nordex-group-erhaelt-von-uka-auftraege-ueber-700-mw-aus-deutschland/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+        <a href="https://www.nordex-online.com/de/2026/07/nordex-group-erhaelt-von-uka-auftraege-ueber-700-mw-aus-deutschland/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">→</span></a>
       </div>
     </div>
 
     <!-- SIGNAL 3 -->
     <div class="signal">
       <div class="signal-number-row">
-        <div class="signal-number">SIGNAL 03 / 05</div>
-        <div class="signal-type">Multi-Standort-Fertigung</div>
+        <div class="signal-badge">3</div>
+        <div class="signal-type live">Multi-Standort-Fertigung · 27.07.2026</div>
       </div>
       <h3 class="signal-company">Siemens Energy · NSORe (Neptun Werft &amp; Smulders)</h3>
       <div class="signal-meta">
         <span><strong>Bau-Standort</strong>&nbsp; Rostock-Warnemünde, DE</span>
-        <span><strong>Size</strong>&nbsp; Konzern &gt;100.000 MA</span>
+        <span><strong>Größe</strong>&nbsp; Konzern &gt;100.000 MA</span>
         <span><strong>Sektor</strong>&nbsp; Offshore-Netzanbindung</span>
         <span><strong>Datum</strong>&nbsp; 27.07.2026</span>
       </div>
       <p class="signal-event">
-        Siemens Energy baut gemeinsam mit NSORe (Joint Venture aus Neptun Werft/Meyer-Werft-Gruppe und dem belgischen Smulders) im Auftrag von Übertragungsnetzbetreiber 50Hertz erstmals eine <span class="highlight">2-Gigawatt-Konverterplattform</span> mit einer deutschen Werft: „North Sea Connector 2". Rund 95 Prozent des Siemens-Energy-Lieferumfangs kommt aus Deutschland – Transformatoren und Konverter aus Nürnberg, gasisolierte Schaltanlagen aus Berlin, Topside-Fertigung in Rostock-Warnemünde, Jacket-Fertigung bei Smulders in den Niederlanden. Über 500 neue Arbeitsplätze entstehen in Mecklenburg-Vorpommern; Inbetriebnahme Ende 2034.
+        Siemens Energy baut gemeinsam mit NSORe (Joint Venture aus Neptun Werft/Meyer-Werft-Gruppe und dem belgischen Smulders) im Auftrag von Übertragungsnetzbetreiber 50Hertz erstmals eine <span class="highlight">2-Gigawatt-Konverterplattform</span> mit einer deutschen Werft: „North Sea Connector 2". Rund 95 Prozent des Siemens-Energy-Lieferumfangs kommt aus Deutschland — Transformatoren und Konverter aus Nürnberg, gasisolierte Schaltanlagen aus Berlin, Topside-Fertigung in Rostock-Warnemünde, Jacket-Fertigung bei Smulders in den Niederlanden. Über 500 neue Arbeitsplätze entstehen in Mecklenburg-Vorpommern; Inbetriebnahme Ende 2034.
       </p>
       <div class="signal-implication">
         <div class="signal-implication-label">Sales Play</div>
         <div class="signal-implication-text">
-          Vier Fertigungsstandorte in drei Ländern (Nürnberg, Berlin, Rostock, Niederlande) bedeuten Komponententransport zwischen mehreren Werken vor der finalen Montage auf der Plattform – genau das Multi-Modal-Muster aus Schwertransport, Seeverkehr und RoRo, das Alfons Köster im Kerngeschäft abdeckt. Mehrjähriger Baubeginn = wiederkehrendes Logistikvolumen, kein Einmalgeschäft. Adressat: Projektlogistik bei NSORe/Neptun Werft Rostock.
+          Vier Fertigungsstandorte in drei Ländern (Nürnberg, Berlin, Rostock, Niederlande) bedeuten Komponententransport zwischen mehreren Werken vor der finalen Montage auf der Plattform — genau das Multi-Modal-Muster aus Schwertransport, Seeverkehr und RoRo, das Alfons Köster im Kerngeschäft abdeckt. Mehrjähriger Baubeginn = wiederkehrendes Logistikvolumen, kein Einmalgeschäft. Adressat: Projektlogistik bei NSORe/Neptun Werft Rostock.
         </div>
       </div>
       <div class="signal-footer">
         <div class="source-info"><strong>Quelle</strong>&nbsp; windkraft-journal.de &middot; 27.07.2026</div>
-        <a href="https://www.windkraft-journal.de/2026/07/27/siemens-energy-baut-erstmals-gemeinsam-mit-einer-deutschen-werft-eine-2-gw-konverterplattform/226405" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+        <a href="https://www.windkraft-journal.de/2026/07/27/siemens-energy-baut-erstmals-gemeinsam-mit-einer-deutschen-werft-eine-2-gw-konverterplattform/226405" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">→</span></a>
       </div>
     </div>
 
     <!-- SIGNAL 4 -->
     <div class="signal">
       <div class="signal-number-row">
-        <div class="signal-number">SIGNAL 04 / 05</div>
+        <div class="signal-badge">4</div>
         <div class="signal-type">FEED-Auftrag · Exportanlage</div>
       </div>
       <h3 class="signal-company">thyssenkrupp Uhde</h3>
       <div class="signal-meta">
         <span><strong>HQ</strong>&nbsp; Dortmund, Deutschland</span>
-        <span><strong>Size</strong>&nbsp; Konzern &gt;90.000 MA</span>
+        <span><strong>Größe</strong>&nbsp; Konzern &gt;90.000 MA</span>
         <span><strong>Sektor</strong>&nbsp; Anlagenbau · Ammoniak-Exportinfrastruktur</span>
         <span><strong>Datum</strong>&nbsp; 20.04.2026</span>
       </div>
@@ -472,52 +544,62 @@
       <div class="signal-implication">
         <div class="signal-implication-label">Sales Play</div>
         <div class="signal-implication-text">
-          Die FEED-Phase ist der Moment, in dem die Logistik-Spec für die anschließende Bauphase entsteht, bevor sie sich festschreibt – Zeitfenster ca. 12–18 Monate bis zur EPC-Vergabe. Eine Exportanlage mit Kai-Integration und Schiffsladesystemen bedeutet Schwergut-Komponenten (Tankmodule, Kompressoren, Verladearme), die aus Deutschland/Europa nach Südostasien verschifft werden müssen – direkte Deckung mit Köster's eigenem Referenzprofil (Anlagenteile weltweit, seemäßige Verpackung, Crosstrade). Adressat: Projekteinkauf/Procurement thyssenkrupp Uhde Dortmund.
+          Die FEED-Phase ist der Moment, in dem die Logistik-Spec für die anschließende Bauphase entsteht, bevor sie sich festschreibt — Zeitfenster ca. 12–18 Monate bis zur EPC-Vergabe. Eine Exportanlage mit Kai-Integration und Schiffsladesystemen bedeutet Schwergut-Komponenten (Tankmodule, Kompressoren, Verladearme), die aus Deutschland/Europa nach Südostasien verschifft werden müssen — direkte Deckung mit Kösters eigenem Referenzprofil (Anlagenteile weltweit, seemäßige Verpackung, Crosstrade). Adressat: Projekteinkauf/Procurement thyssenkrupp Uhde Dortmund.
         </div>
       </div>
       <div class="signal-footer">
         <div class="source-info"><strong>Quelle</strong>&nbsp; worldfertilizer.com &middot; 20.04.2026</div>
-        <a href="https://www.worldfertilizer.com/environment/20042026/thyssenkrupp-uhde-secures-plant-expansion-contract/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+        <a href="https://www.worldfertilizer.com/environment/20042026/thyssenkrupp-uhde-secures-plant-expansion-contract/" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">→</span></a>
       </div>
     </div>
 
     <!-- SIGNAL 5 -->
     <div class="signal">
       <div class="signal-number-row">
-        <div class="signal-number">SIGNAL 05 / 05</div>
+        <div class="signal-badge">5</div>
         <div class="signal-type">Auftragsvergabe · Wasserkraft</div>
       </div>
       <h3 class="signal-company">ANDRITZ Hydro</h3>
       <div class="signal-meta">
         <span><strong>HQ</strong>&nbsp; Graz, Österreich</span>
-        <span><strong>Size</strong>&nbsp; Konzern &gt;29.000 MA weltweit</span>
+        <span><strong>Größe</strong>&nbsp; Konzern &gt;29.000 MA weltweit</span>
         <span><strong>Sektor</strong>&nbsp; Wasserkraftanlagenbau</span>
         <span><strong>Datum</strong>&nbsp; 08.04.2026</span>
       </div>
       <p class="signal-event">
-        ANDRITZ Hydro erhält von CB Elektrik Üretim (CABA Group) den Auftrag für <span class="highlight">fünf Francis-Turbinen-Generator-Sätze</span> (je 64 MW) plus einen ECO-Flow-Satz (19 MW) für das 339-MW-Wasserkraftwerk Cizre in der Südost-Türkei – Konstruktion, Fertigung, Lieferung, Installation und Inbetriebnahme, Auftragswert im unteren dreistelligen Millionen-Euro-Bereich. Frank Mette, General Manager ANDRITZ Hydro Türkei: „Projekte wie Cizre zeigen, wie moderne Wasserkrafttechnologie die Transformation hin zu nachhaltigen Energiesystemen unterstützt."
+        ANDRITZ Hydro erhält von CB Elektrik Üretim (CABA Group) den Auftrag für <span class="highlight">fünf Francis-Turbinen-Generator-Sätze</span> (je 64 MW) plus einen ECO-Flow-Satz (19 MW) für das 339-MW-Wasserkraftwerk Cizre in der Südost-Türkei — Konstruktion, Fertigung, Lieferung, Installation und Inbetriebnahme, Auftragswert im unteren dreistelligen Millionen-Euro-Bereich. Frank Mette, General Manager ANDRITZ Hydro Türkei: „Projekte wie Cizre zeigen, wie moderne Wasserkrafttechnologie die Transformation hin zu nachhaltigen Energiesystemen unterstützt."
       </p>
       <div class="signal-implication">
         <div class="signal-implication-label">Sales Play</div>
         <div class="signal-implication-text">
-          Fünf Turbinen-Generator-Sätze dieser Leistungsklasse wiegen pro Einheit typischerweise mehrere hundert Tonnen – exakt das Schwergut-Profil, das Köster im Tagesgeschäft abwickelt (vgl. eigener 150-Tonnen-Generator-Case nach Taschkent). Die Lieferung nach Cizre erfordert kombinierte See-/Schwertransport-Logistik in eine anspruchsvolle Zielregion – genau die Kompetenz, die Köster mit Referenzen wie Irak und Libyen bereits nachweist. Adressat: Projektlogistik ANDRITZ Hydro.
+          Fünf Turbinen-Generator-Sätze dieser Leistungsklasse wiegen pro Einheit typischerweise mehrere hundert Tonnen — exakt das Schwergut-Profil, das Köster im Tagesgeschäft abwickelt (vgl. eigener 150-Tonnen-Generator-Case nach Taschkent). Die Lieferung nach Cizre erfordert kombinierte See-/Schwertransport-Logistik in eine anspruchsvolle Zielregion — genau die Kompetenz, die Köster mit Referenzen wie Irak und Libyen bereits nachweist. Adressat: Projektlogistik ANDRITZ Hydro.
         </div>
       </div>
       <div class="signal-footer">
         <div class="source-info"><strong>Quelle</strong>&nbsp; windkraft-journal.de &middot; 08.04.2026</div>
-        <a href="https://www.windkraft-journal.de/2026/04/08/andritz-liefert-elektromechanischen-ausruestung-fuer-ein-neues-wasserkraftwerk-in-der-tuerkei/223214" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">&rsaquo;</span></a>
+        <a href="https://www.windkraft-journal.de/2026/04/08/andritz-liefert-elektromechanischen-ausruestung-fuer-ein-neues-wasserkraftwerk-in-der-tuerkei/223214" target="_blank" rel="noopener noreferrer" class="source-button">Quelle ansehen <span class="arrow">→</span></a>
       </div>
     </div>
 
   </div>
 </section>
 
-<section class="synthesis">
+<div class="synthesis-wrap">
   <div class="container">
-    <div class="synthesis-label">Synthese</div>
-    <p class="synthesis-text">
-      Was diese fünf Signale verbindet: alle fünf DACH-Schwermaschinenbauer haben innerhalb von 14 Wochen einen konkreten Auftrag oder Meilenstein verbucht, bei dem die physische Bewegung von Übergrössen- und Schwergut-Komponenten unmittelbar bevorsteht – von der 700-Tonnen-Tunnelbohrmaschine in München über die Multi-Standort-Fertigung der Siemens-Energy-Konverterplattform bis zu den Turbinen-Sätzen für Cizre. <span class="em">Bei mindestens zwei der fünf Fälle – thyssenkrupp Uhde nach Südostasien und ANDRITZ Hydro in die Südost-Türkei – geht die Reise in exakt die Zielregionen-Kategorie, die Alfons Köster bereits selbst als Referenz führt.</span> Die Frage in diesen Häusern ist nicht mehr „brauchen wir einen Projektlogistik-Partner", sondern welcher Spediteur die Zerlegung, Verpackung und Verschiffung in den nächsten Quartalen übernimmt.
-    </p>
+    <div class="synthesis">
+      <div class="synthesis-label">Synthese</div>
+      <p class="synthesis-text">
+        Was diese fünf Signale verbindet: Alle fünf DACH-Schwermaschinenbauer haben innerhalb von 14 Wochen einen konkreten Auftrag oder Meilenstein verbucht, bei dem die physische Bewegung von Übergrößen- und Schwergut-Komponenten unmittelbar bevorsteht — von der 700-Tonnen-Tunnelbohrmaschine in München über die Multi-Standort-Fertigung der Siemens-Energy-Konverterplattform bis zu den Turbinen-Sätzen für Cizre. <span class="em">Bei mindestens zwei der fünf Fälle — thyssenkrupp Uhde nach Südostasien und ANDRITZ Hydro in die Südost-Türkei — geht die Reise in exakt die Zielregionen-Kategorie, die Alfons Köster bereits selbst als Referenz führt.</span> Die Frage in diesen Häusern ist nicht mehr „brauchen wir einen Projektlogistik-Partner", sondern welcher Spediteur die Zerlegung, Verpackung und Verschiffung in den nächsten Quartalen übernimmt.
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="bottom-cta">
+  <div class="container">
+    <h3>Das ist die Stichprobe. Im Assessment sehen Sie den vollen Markt.</h3>
+    <p>60–90 Minuten. Vollständige Kontenliste, ICP-Analyse und die fertige Ansprache dazu.</p>
+    <a class="bottom-cta-btn" href="https://leadpioneer.de" target="_blank" rel="noopener noreferrer">Assessment buchen <span>→</span></a>
   </div>
 </section>
 
@@ -533,7 +615,7 @@
       <div>
         <div class="footer-block-label">Vorbehalt</div>
         <div class="footer-block-text">
-          Dieser Snapshot ist eine Stichprobe, kein vollständiges TAM. Im Pipeline Assessment wird die personalisierte Account-Liste mit 50+ Konten und aktiven Signalen aufgesetzt, abgestimmt auf den ICP (Schwergut-/Projektverladung, Zielregionen, Losgrössen), den wir gemeinsam validieren.
+          Dieser Snapshot ist eine Stichprobe, kein vollständiges TAM. Im Pipeline Assessment wird die personalisierte Account-Liste mit 50+ Konten und aktiven Signalen aufgesetzt, abgestimmt auf den ICP (Schwergut-/Projektverladung, Zielregionen, Losgrößen), den wir gemeinsam validieren.
         </div>
       </div>
     </div>
@@ -541,7 +623,7 @@
 </section>
 
 <div class="signature">
-  <div>Alfons Köster · Markt-Trigger-Snapshot</div>
+  <div>Alfons Köster &amp; Co. GmbH · Markt-Trigger-Snapshot</div>
   <div class="sg-brand">LeadPioneer</div>
 </div>
 
